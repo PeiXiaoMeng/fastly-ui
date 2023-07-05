@@ -1,0 +1,87 @@
+<template>
+  <div show="{{ visible }}" class="toast-bg">
+    <div class="toast toast__{{ (icon && icon !== 'none' || image) && 'hasIcon' }}">
+      <image if="{{ image }}" src="{{ image }}"></image>
+      <image elif="{{ icon && icon === 'success' && !image }}" src="./assets/right.png"></image>
+      <image elif="{{ icon && icon === 'error' && !image }}" src="./assets/error.png"></image>
+      <text>{{ text || '' }}</text>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  props: {
+    text: {
+      type: String,
+      required: false,
+      default: '文本内容'
+    },
+    duration: { // 元素持续的事件（设置为 0 将不会自动消失）
+      type: Number,
+      required: false,
+      default: 2000,
+    },
+    icon: { // icon类型 success ｜ error
+      type: String,
+      required: false,
+      default: 'none',
+    },
+    image: { // 自定义图片路径
+      type: String,
+      required: false,
+      default: '',
+    }
+  },
+  data() {
+    return {
+      visible: false,
+    }
+  },
+  onInit() {
+
+  },
+  showToast() {
+    this.visible = true;
+    setTimeout(() => { // 为了能够获取修改后的duration
+      (this.duration || (this.duration !== 0)) && setTimeout(() => this.visible = false, this.duration || 0);
+    }, 0);
+  }
+}
+</script>
+
+<style lang="less">
+.toast-bg {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  align-items: center;
+  justify-content: center;
+}
+.toast {
+  max-width: 500px;
+  padding: 20px 30px;
+  background-color: rgba(0, 0, 0, .6);
+  justify-content: center;
+  align-items: center;
+  border-radius: 6px;
+  flex-direction: column;
+  image {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 20px;
+  }
+  text {
+    color: #fff;
+    font-size: 24px;
+    text-align: center;
+  }
+  &__hasIcon {
+    width: 300px;
+  }
+}
+</style>

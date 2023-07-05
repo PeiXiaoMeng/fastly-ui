@@ -1,0 +1,84 @@
+<import name="header" src="@component/header.ux"></import>
+<import name="custom-label" src="@component/label.ux"></import>
+<import name="fast-toast" src="@fastly/fast-toast/index.ux"></import>
+<import name="fast-button" src="@fastly/fast-button/index.ux"></import>
+ 
+<template>
+  <div class="home">
+    <header title="fast-toast 提示组"></header>
+    <fast-toast id="Toast" text="{{ toastText }}" duration="{{ toastDuration }}" icon="{{ toastIcon }}" image="{{ cutomImage }}"></fast-toast>
+
+    <custom-label title="长提示"></custom-label>
+    <fast-button text="长提示3000ms Toast" size="large" @handle-click="btnClick('长提示3000ms Toast')" sty="margin-bottom: 20px;"></fast-button>
+
+    <custom-label title="短提示"></custom-label>
+    <fast-button text="短提示1000ms Toast" size="large" @handle-click="btnClickShort('短提示1000ms Toast')" sty="margin-bottom: 20px;"></fast-button>
+
+    <custom-label title="文案加长提示"></custom-label>
+    <fast-button text="文案加长提示 Toast fast-ui库 fast-toast组件" size="large" @handle-click="btnClick('文案加长提示 Toast 快应用fast-ui库 fast-toast组件')" sty="margin-bottom: 20px;"></fast-button>
+
+    <custom-label title="正确toast提示"></custom-label>
+    <fast-button text="正确toast提示" size="large" @handle-click="btnClickSuccess('正确toast提示')" sty="margin-bottom: 20px;"></fast-button>
+
+    <custom-label title="错误toast提示"></custom-label>
+    <fast-button text="错误toast提示" size="large" @handle-click="btnClickErr('错误toast提示')" sty="margin-bottom: 20px;"></fast-button>
+
+    <custom-label title="自定义图片提示"></custom-label>
+    <fast-button text="自定义图片提示" size="large" @handle-click="btnClickImage('自定义图片提示')" sty="margin-bottom: 20px;"></fast-button>
+  </div>
+</template>
+
+<script>
+export default {
+  private: {
+    toastText: '快应用ui库fast-toast提示',
+    toastIcon: 'none',
+    toastDuration: 3000,
+    cutomImage: '',
+  },
+  btnClick(text) {
+    this.cutomImage = '';
+    this.toastIcon = 'none';
+    this.toastDuration = 3000;
+    this.toastText = text || '';
+    this.$child('Toast').showToast();
+  },
+  btnClickShort(text) {
+    this.cutomImage = '';
+    this.toastIcon = 'none';
+    this.toastText = text || '';
+    this.toastDuration = 1000;
+    this.$child('Toast').showToast();
+  },
+  btnClickSuccess(text) {
+    this.cutomImage = '';
+    this.toastText = text || '';
+    this.toastIcon = 'success';
+    this.$child('Toast').showToast();
+  },
+  btnClickErr(text) {
+    this.cutomImage = '';
+    this.toastText = text || '';
+    this.toastIcon = 'error';
+    this.$child('Toast').showToast();
+  },
+  btnClickImage(text) {
+    this.cutomImage = '../../assets/images/custom.png'
+    this.toastText = text || '';
+    this.toastIcon = 'none';
+    this.$child('Toast').showToast();
+  }
+}
+</script>
+
+<style lang="less">
+.home {
+  flex-direction: column;
+  padding-left: 32px;
+  padding-right: 32px;
+}
+.btn-box {
+  align-items: center;
+  height: 130px;
+}
+</style>

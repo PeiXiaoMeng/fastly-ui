@@ -1,0 +1,26 @@
+<import name="header" src="@component/header.ux"></import>
+<import name="fast-tag" src="@fastly/fast-tag/index.ux"></import>
+ 
+<template>
+  <div class="home">
+    <header title="fast-input按钮组"></header>
+  </div>
+</template>
+
+<script>
+export default {
+  
+}
+</script>
+
+<style lang="less">
+.home {
+  flex-direction: column;
+  padding-left: 32px;
+  padding-right: 32px;
+}
+.btn-box {
+  align-items: center;
+  height: 130px;
+}
+</style>

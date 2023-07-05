@@ -1,0 +1,56 @@
+<template>
+  <div class="header">
+    <text if="{{ title }}">{{ title }}</text>
+    <div class="line"></div>
+    <text if="{{ desc }}" class="desc">{{ desc }}</text>
+  </div>
+</template>
+
+<script>
+export default {
+  props: {
+    title: {
+      type: String,
+      required: true,
+      default: ''
+    },
+    desc: {
+      type: String,
+      required: false,
+      default: ''
+    },
+  }
+}
+</script>
+
+<style lang="less">
+.header {
+  height: 260px;
+  width: 750px;
+  margin-left: -32px;
+  margin-right: -32px;
+  background-color: #efeeee;
+  flex-direction: column;
+  justify-content: center;
+  text {
+    font-weight: bold;
+    color: #000000;
+    margin-left: 32px;
+    margin-right: 32px;
+    font-size: 36px;
+  }
+  .line {
+    width: 190px;
+    height: 4px;
+    background-color: #6190e8;
+    margin-top: 20px;
+    margin-left: 32px;
+    border-radius: 4px;
+  }
+  .desc {
+    color: #90908f;
+    font-size: 22px;
+    margin-top: 40px;
+  }
+}
+</style>

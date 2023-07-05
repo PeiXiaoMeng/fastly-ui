@@ -1,0 +1,45 @@
+<template>
+  <div class="label">
+    <div class="box"></div>
+    <text>{{ title }}</text>
+  </div>
+</template>
+
+<script>
+export default {
+  props: {
+    title: {
+      type: String,
+      required: true,
+      default: '标题'
+    }
+  },
+  data() {
+    return {
+
+    }
+  }
+}
+</script>
+
+
+<style lang="less">
+.label {
+  flex-direction: row;
+  height: 40px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  .box {
+    width: 4px;
+    height: 100%;
+    background-color: #6190e8;
+    border-radius: 4px;
+  }
+  text {
+    margin-left: 10px;
+    color: #000000;
+    font-weight: bold;
+  }
+}
+</style>
+

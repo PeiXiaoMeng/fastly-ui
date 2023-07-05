@@ -1,0 +1,80 @@
+<template>
+  <div 
+    class="tag tag__{{ size || 'normal' }} tag__{{ type || '' }} tag__{{ circle && ((size || 'normal') + 'Circle') }}" 
+    style="{{ sty || '' }}"
+    @click="handleClick">
+    <text>{{ text || '标签' }}</text>
+  </div> 
+</template>
+
+<script>
+export default {
+  props: {
+    text: {
+      type: String,
+      require: false,
+      default: '默认标签'
+    },
+    size: {
+      type: String,
+      require: false,
+      default: 'normal'
+    },
+    type: {
+      type: String,
+      require: false,
+      default: ''
+    },
+    circle: {
+      type: Boolean,
+      require: false,
+      default: false
+    },
+    sty: {
+      type: String,
+      require: false,
+      default: ''
+    }
+  },
+  data() {
+    return {
+
+    }
+  },
+  handleClick() {
+    this.$emit('handleClick');
+  }
+}
+</script>
+
+<style lang="less">
+.tag {
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  background-color: #f7f7f7;
+  &__normal {
+    width: 100px;
+    height: 60px;
+  }
+  &__small {
+    width: 80px;
+    height: 40px;
+    text {
+
+    }
+  }
+  &__primary {
+    background-color: #6190e8;
+    text {
+      color: #fff;
+    }
+  }
+  &__normalCircle {
+    border-radius: 60px;
+  }
+  &__smallCircle {
+    border-radius: 40px;
+  }
+}
+</style>

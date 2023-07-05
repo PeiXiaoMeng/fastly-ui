@@ -1,0 +1,112 @@
+<template>
+  <div>
+    <div 
+      if="{{ supportMinBtn }}"
+      class="button button__{{ size || 'normal' }} button__{{ type || '' }} button__{{ circle && ((size || 'normal') + 'Circle')}} button__{{ disabled && ((type || 'nor') + 'Disabled') }}" 
+      @click="handleClick" 
+      style="{{ (size === 'small' ? 'min-width: 140px;padding: 0px 20px;' : size === 'large' ? 'width: 100%;' : 'min-width: 200px;padding: 0px 20px;') + (sty || '') }}">
+      <text>{{ text || '默认按钮' }}</text>
+    </div>
+    <div 
+      else
+      class="button button__{{ size || 'normal' }} button__{{ type || '' }} button__{{ circle && ((size || 'normal') + 'Circle')}} button__{{ disabled && ((type || 'nor') + 'Disabled') }}" 
+      @click="handleClick" 
+      style="{{ (size === 'small' ? 'width: 140px;' : size === 'large' ? 'width: 100%;' :'width: 200px;') + (sty || '') }}">
+      <text>{{ text || '默认按钮' }}</text>
+    </div>
+  </div>
+</template>
+
+<script>
+import device from '@system.device'
+
+export default {
+  props: {
+    text: {
+      type: String,
+      require: false,
+      default: '默认按钮'
+    },
+    size: {
+      type: String,
+      require: false,
+      default: 'normal'
+    },
+    type: {
+      type: String,
+      require: false,
+      default: ''
+    },
+    circle: {
+      type: Boolean,
+      require: false,
+      default: false
+    },
+    disabled: {
+      type: Boolean,
+      require: false,
+      default: false
+    },
+    sty: {
+      type: String,
+      require: false,
+      default: ''
+    }
+  },
+  data() {
+    return {
+      supportMinBtn: false, // 是否平台版本大于等于1080，支持min-width
+    }
+  },
+  onInit() {
+    device.getInfo({
+      success: (ret) => {
+        this.supportMinBtn = ret.platformVersionCode >= 1080;
+      }
+    })
+  },
+  handleClick() {
+    if (this.disabled) return;
+    this.$emit('handleClick');
+  }
+}
+</script>
+
+<style lang="less">
+.button {
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  border: 1px solid #030303;
+  &__normal {
+    height: 80px;
+  }
+  &__small {
+    height: 60px;
+  }
+  &__large {
+    height: 80px;
+  }
+  &__primary {
+    background-color: #6190e8;
+    border: 1px solid #6190e8;
+    text {
+      color: #fff;
+    }
+  }
+  &__normalCircle, &__largeCircle {
+    border-radius: 80px;
+  }
+  &__smallCircle {
+    border-radius: 60px;
+  }
+  &__norDisabled {
+    opacity: 0.4;
+    border: 1px solid #c5d9e8;
+  }
+  &__primaryDisabled {
+    border: 1px solid #c5d9e8;
+    background-color: #c5d9e8;
+  }
+}
+</style>

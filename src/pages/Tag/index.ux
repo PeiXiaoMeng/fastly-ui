@@ -1,0 +1,35 @@
+<import name="header" src="@component/header.ux"></import>
+<import name="fast-tag" src="@fastly/fast-tag/index.ux"></import>
+ 
+<template>
+  <div class="home">
+    <header title="fast-tag按钮组"></header>
+    <fast-tag text="tag1" size="normal" sty="margin-top: 20px;" @handle-click="tagClick"></fast-tag>
+    <fast-tag text="tag2" size="normal" type="primary" sty="margin-top: 20px;"></fast-tag>
+    <fast-tag text="tag1" size="normal" circle="{{ true }}" sty="margin-top: 20px;"></fast-tag>
+    <fast-tag text="tag5" size="small" circle="{{ true }}" type="primary" sty="margin-top: 20px;"></fast-tag>
+    <fast-tag text="tag3" size="small" sty="margin-top: 20px;"></fast-tag>
+  </div>
+</template>
+
+<script>
+import prompt from '@system.prompt'
+
+export default {
+  tagClick() {
+    prompt.showToast({ message: '您点击了tag组件' });
+  },
+}
+</script>
+
+<style lang="less">
+.home {
+  flex-direction: column;
+  padding-left: 32px;
+  padding-right: 32px;
+}
+.btn-box {
+  align-items: center;
+  height: 130px;
+}
+</style>
